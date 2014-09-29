@@ -1,0 +1,62 @@
+import rdflib
+#We need requests for a weird error about OpenCyc formatting, they do not specify that they are using xml
+import requests
+
+#Get some naming edge names
+from rdflib.namespace import RDF
+from rdflib.namespace import RDFS
+from rdflib.namespace import OWL
+
+#Re-define edges for readibility
+InstanceOfEdge = RDF.type
+TypeOfEdge = RDFS.subClassOf
+OutsideSourceURL = OWL.sameAs
+NameOfId = rdflib.term.URIRef(u'http://sw.cyc.com/CycAnnotations_v1#label')
+PrettyString  = rdflib.term.URIRef(u'http://sw.opencyc.org/concept/Mx4rwLSVCpwpEbGdrcN5Y29ycA')
+
+#Start with Shoe, and request the web page (sent GET request)
+resp = requests.get('http://sw.opencyc.org/concept/Mx4rvVik6JwpEbGdrcN5Y29ycA')
+#Parse the returned result via rdflib
+g = rdflib.Graph()
+g.parse(data=resp.content,format="xml")
+
+def printRelation(subject, str, object):
+    "Prints the given relation between subject and object"
+    print subject, str, object
+
+def printTextName(subject):
+    "Prints the text name for the subject, if it exists"
+    if (subject,NameOfId,None) in g:
+        for s,p,o in g.triples( (subject, NameOfId, None) ):
+            print s,' is ',o
+
+def printSourceURLs(thing):
+    "Prints the outside source URLS for the thing, if they exist"
+    if(thing, OutsideSourceURL, None) in g:
+        for s,p,o in g.triples( (thing, OutsideSourceURL, None) ):
+            print s,'has source URL of ',o
+
+#RDF uses (subj,pred,obj), look for all data about shoe
+for subject,predicate,obj in g:
+    
+    #InstanceOf edges, excluding those with w3 links
+    if predicate==InstanceOfEdge and obj.find("w3.org") == -1:
+        printRelation(subject,' is instance of ',obj)
+
+
+    #TypeOf edges
+    elif predicate==TypeOfEdge:
+        printRelation(subject,' is type of ',obj)
+
+    #Aliases
+    elif predicate==PrettyString:
+        printRelation(subject,' is alias of ',obj)
+
+    else:
+        continue
+
+    printTextName(subject)
+    printSourceURLs(obj)
+
+
+
