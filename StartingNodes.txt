@@ -1,0 +1,9 @@
+http://sw.opencyc.org/concept/Mx4rvVik6JwpEbGdrcN5Y29ycA Shoe.txt
+http://sw.opencyc.org/concept/Mx4rvViISpwpEbGdrcN5Y29ycA Pen.txt
+http://sw.opencyc.org/concept/Mx4rvVioJ5wpEbGdrcN5Y29ycA Knife.txt
+http://sw.opencyc.org/concept/Mx4rvViu4JwpEbGdrcN5Y29ycA Laptop.txt
+http://sw.opencyc.org/concept/Mx4rwAOkSZwpEbGdrcN5Y29ycA Keyboard.txt
+http://sw.opencyc.org/concept/Mx4rvVjmq5wpEbGdrcN5Y29ycA Book.txt
+http://sw.opencyc.org/concept/Mx4rvVjIZpwpEbGdrcN5Y29ycA TelevisionSet.txt
+http://sw.opencyc.org/concept/Mx4rvWeKsJwpEbGdrcN5Y29ycA MouseCable.txt
+http://sw.opencyc.org/concept/Mx4rvgHnapwpEbGdrcN5Y29ycA Cap.txt
